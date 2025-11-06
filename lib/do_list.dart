@@ -28,7 +28,7 @@ class _ToDoState extends State<ToDoList> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ...tasks.map((task) => TaskComponent(task ,switchEnabled))
+        ...tasks.map((task) => Container(margin : EdgeInsets.all(8) , child : TaskComponent(task ,switchEnabled)))
       ],
     );
   }

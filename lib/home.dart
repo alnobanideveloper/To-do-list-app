@@ -26,7 +26,8 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Expanded(child: ToDoList()),
-          ButtomBar(addTask )
+          ButtomBar(addTask ),
+          SizedBox(height: 32,)
         ],
       ),
     );

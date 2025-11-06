@@ -21,15 +21,18 @@ class _ButtomBarState extends State<ButtomBar> {
       action: SnackBarAction(
         label: 'Dismiss',
         onPressed: () {
-          
         },
-      )
+      
+      ),
+      duration: Duration(seconds: 1),
     );
+
 
   }
 
   void submitTask() {
-      if(textController == null || textController!.text.isEmpty){
+      if( textController.text.isEmpty){
+        ScaffoldMessenger.of(context).showSnackBar(mySnackBar);
         return;
       }
 
@@ -43,11 +46,17 @@ class _ButtomBarState extends State<ButtomBar> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(child: TextField(
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            
+          )),
           controller: textController,
         )),
-        SizedBox(width: 32),
+        Spacer(),
         IconButton(onPressed: submitTask, icon: Icon(Icons.add)),
       ],
     );
