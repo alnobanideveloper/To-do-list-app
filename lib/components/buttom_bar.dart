@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/models/Task.dart';
 
 class ButtomBar extends StatefulWidget {
@@ -11,7 +12,8 @@ class ButtomBar extends StatefulWidget {
 }
 
 class _ButtomBarState extends State<ButtomBar> {
-  var _taskTitle  = '';
+  
+  TextEditingController textController = TextEditingController() ;
 
   SnackBar get mySnackBar {
     return  SnackBar(
@@ -23,15 +25,18 @@ class _ButtomBarState extends State<ButtomBar> {
         },
       )
     );
+
   }
 
   void submitTask() {
-      if(_taskTitle.isEmpty){
-        ScaffoldMessenger.of(context).showSnackBar(mySnackBar);
+      if(textController == null || textController!.text.isEmpty){
         return;
       }
 
-    widget.addTask(Task(_taskTitle, false));
+
+
+    widget.addTask(Task(textController!.text, false));
+    textController.clear();
     
   }
 
@@ -40,7 +45,7 @@ class _ButtomBarState extends State<ButtomBar> {
     return Row(
       children: [
         Expanded(child: TextField(
-          onChanged: (value) => {_taskTitle = value},
+          controller: textController,
         )),
         SizedBox(width: 32),
         IconButton(onPressed: submitTask, icon: Icon(Icons.add)),

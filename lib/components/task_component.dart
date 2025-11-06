@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/Task.dart';
 
 class TaskComponent extends StatefulWidget {
-  const TaskComponent(this.task, {super.key});
+   TaskComponent(this.task, this.switchEnabled, {super.key});
+
   final Task task;
+  void Function(Task) switchEnabled;
 
   @override
   State<TaskComponent> createState() => _TaskComponentState();
 }
 
 class _TaskComponentState extends State<TaskComponent> {
-  void switchChecked() {}
+  void switchChecked() {
+    widget.switchEnabled(widget.task);
+  }
 
   @override
   Widget build(BuildContext context) {
